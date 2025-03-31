@@ -52,6 +52,11 @@ export const AddDeviceForm = ({ rooms, onAddDevice }: AddDeviceFormProps) => {
     setOpen(false);
   };
 
+  const handleTypeChange = (value: string) => {
+    // Cast the value to the correct type union
+    setValue('type', value as 'light' | 'fan' | 'ac' | 'other');
+  };
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
@@ -80,7 +85,7 @@ export const AddDeviceForm = ({ rooms, onAddDevice }: AddDeviceFormProps) => {
             <Label htmlFor="type">Device Type</Label>
             <Select 
               defaultValue="light"
-              onValueChange={(value) => setValue('type', value as 'light' | 'fan' | 'ac' | 'other')}
+              onValueChange={handleTypeChange}
             >
               <SelectTrigger>
                 <SelectValue placeholder="Select device type" />
