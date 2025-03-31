@@ -22,3 +22,8 @@ export interface User {
   deviceId: string; // For device-based authentication
   isAuthorized: boolean;
 }
+
+export interface ApiEndpoint {
+  url: string;
+  name?: string;
+}

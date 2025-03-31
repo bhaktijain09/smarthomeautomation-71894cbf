@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { ApiConfiguration } from "@/components/ApiConfiguration";
 
 const Header = () => {
   const { user, signOut } = useAuth();
@@ -17,6 +18,7 @@ const Header = () => {
         </div>
         <div className="flex flex-1 items-center justify-end space-x-4">
           <nav className="flex items-center space-x-2">
+            {user && <ApiConfiguration />}
             {user ? (
               <>
                 <span className="text-sm text-muted-foreground mr-2">
