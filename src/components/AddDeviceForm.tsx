@@ -30,23 +30,25 @@ interface AddDeviceFormProps {
   }) => void;
 }
 
+type DeviceFormValues = {
+  name: string;
+  type: 'light' | 'fan' | 'ac' | 'other';
+  roomId: string;
+}
+
 export const AddDeviceForm = ({ rooms, onAddDevice }: AddDeviceFormProps) => {
   const [open, setOpen] = useState(false);
-  const { register, handleSubmit, reset, setValue, watch, formState: { errors } } = useForm({
+  const { register, handleSubmit, reset, setValue, watch, formState: { errors } } = useForm<DeviceFormValues>({
     defaultValues: {
       name: '',
-      type: 'light' as const,
+      type: 'light',
       roomId: rooms.length > 0 ? rooms[0].id : '',
     }
   });
 
   const selectedType = watch('type');
 
-  const onSubmit = (data: {
-    name: string;
-    type: 'light' | 'fan' | 'ac' | 'other';
-    roomId: string;
-  }) => {
+  const onSubmit = (data: DeviceFormValues) => {
     onAddDevice(data);
     reset();
     setOpen(false);
