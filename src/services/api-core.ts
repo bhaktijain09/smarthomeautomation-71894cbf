@@ -34,10 +34,10 @@ export const fetchWithTimeout = async (url: string, options: RequestInit = {}, t
   }
 };
 
-// Check if running on mobile device
+// Check if running on mobile device (note the correct logic here)
 export const isMobileApp = async (): Promise<boolean> => {
   try {
-    return !Capacitor.isNativePlatform();
+    return Capacitor.isNativePlatform();
   } catch (error) {
     console.error("Error checking platform:", error);
     return false;
