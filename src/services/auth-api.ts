@@ -1,13 +1,13 @@
 
 import { User } from "@/types";
-import { Device } from '@capacitor/core';
+import { Capacitor } from '@capacitor/core';
 
 export const authApi = {
   // Authentication functions
   pairDevice: async (userId: string, deviceId: string): Promise<User> => {
     try {
       // Check if running on a mobile device
-      const isPlatformMobile = await Device.getInfo().then(info => info.platform !== 'web');
+      const isPlatformMobile = Capacitor.isNativePlatform();
       
       console.log("Pairing device. Is mobile platform:", isPlatformMobile);
       
@@ -28,7 +28,7 @@ export const authApi = {
   // Method to check if the app is running on a mobile platform
   isMobilePlatform: async (): Promise<boolean> => {
     try {
-      return await Device.getInfo().then(info => info.platform !== 'web');
+      return Capacitor.isNativePlatform();
     } catch (error) {
       console.error("Error checking platform:", error);
       return false;

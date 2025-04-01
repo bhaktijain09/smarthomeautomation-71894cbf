@@ -1,6 +1,6 @@
 
 import { toast } from "sonner";
-import { Device } from '@capacitor/core';
+import { Capacitor } from '@capacitor/core';
 
 // API constants
 export const DEFAULT_API_BASE_URL = "http://192.168.1.100";  // Default gateway, will be configurable
@@ -37,7 +37,7 @@ export const fetchWithTimeout = async (url: string, options: RequestInit = {}, t
 // Check if running on mobile device
 export const isMobileApp = async (): Promise<boolean> => {
   try {
-    return await Device.getInfo().then(info => info.platform !== 'web');
+    return !Capacitor.isNativePlatform();
   } catch (error) {
     console.error("Error checking platform:", error);
     return false;
