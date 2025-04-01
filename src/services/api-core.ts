@@ -1,5 +1,6 @@
 
 import { toast } from "sonner";
+import { Platform } from '@capacitor/core';
 
 // API constants
 export const DEFAULT_API_BASE_URL = "http://192.168.1.100";  // Default gateway, will be configurable
@@ -33,8 +34,21 @@ export const fetchWithTimeout = async (url: string, options: RequestInit = {}, t
   }
 };
 
+// Check if running on mobile device
+export const isMobileApp = async (): Promise<boolean> => {
+  try {
+    return await Platform.isNativePlatform();
+  } catch (error) {
+    console.error("Error checking platform:", error);
+    return false;
+  }
+};
+
 // New function to discover local devices on the network
 export const discoverDevices = async (): Promise<{found: boolean, endpoint?: string}> => {
+  const isMobile = await isMobileApp();
+  console.log("Discovering devices. Is mobile:", isMobile);
+  
   // This would implement mDNS or other discovery protocol in production
   // For demonstration, we'll try a few common local IP addresses
   const possibleEndpoints = [
@@ -44,6 +58,12 @@ export const discoverDevices = async (): Promise<{found: boolean, endpoint?: str
     'http://192.168.0.100',
     'http://192.168.0.101'
   ];
+  
+  // On mobile, we might want to use a different discovery mechanism
+  if (isMobile) {
+    // Mobile-specific discovery logic could go here
+    toast.info("Searching for devices on your home network...");
+  }
   
   for (const endpoint of possibleEndpoints) {
     try {

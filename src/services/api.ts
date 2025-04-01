@@ -2,14 +2,15 @@
 import { deviceApi } from './device-api';
 import { roomApi } from './room-api';
 import { authApi } from './auth-api';
-import { configureApiEndpoint, getApiEndpoint, discoverDevices, configureEndpoint } from './api-core';
+import { configureApiEndpoint, getApiEndpoint, discoverDevices, configureEndpoint, isMobileApp } from './api-core';
 
 // Re-export everything for backward compatibility
 export {
   configureApiEndpoint,
   getApiEndpoint,
   discoverDevices,
-  configureEndpoint
+  configureEndpoint,
+  isMobileApp
 };
 
 // Combine all APIs into a single object
@@ -29,8 +30,10 @@ export const api = {
   
   // Authentication functions
   pairDevice: authApi.pairDevice,
+  isMobilePlatform: authApi.isMobilePlatform,
   
   // Discovery and configuration functions
   discoverDevices,
-  configureEndpoint
+  configureEndpoint,
+  isMobileApp
 };
