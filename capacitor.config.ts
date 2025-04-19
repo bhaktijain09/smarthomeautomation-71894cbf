@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 import { CapacitorConfig } from '@capacitor/cli';
 
@@ -22,6 +23,14 @@ const config: CapacitorConfig = {
       enabled: true
     }
   }
+=======
+import type { CapacitorConfig } from '@capacitor/cli';
+
+const config: CapacitorConfig = {
+  appId: 'com.SmartHomeAutomationapp',
+  appName: 'SmartHomeAutomationapp',
+  webDir: 'dist'
+>>>>>>> ea0f423 (Fix: remove invalid JSX from DeviceCard component)
 };
 
 export default config;
