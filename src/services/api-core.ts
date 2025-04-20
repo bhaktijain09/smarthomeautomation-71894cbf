@@ -80,7 +80,7 @@ export const discoverDevices = async (): Promise<{found: boolean, endpoint?: str
     }
   }
   
-  toast.error("No smart home devices found on your network");
+  toast.error("smart home devices found on your network");
   return { found: false };
 };
 
